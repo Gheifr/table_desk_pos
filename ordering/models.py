@@ -46,6 +46,8 @@ class Order(models.Model):
             self.closed_at = timezone.now()
             self.save()
 
+    def __str__(self):
+        return f"Order No: {self.order_number}, opened at: {self.opened_at}"
 
 class OrderItem(models.Model):
     is_active = models.BooleanField(default=True)
@@ -61,3 +63,6 @@ class OrderItem(models.Model):
         related_name="order_items",
     )
     quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"Order Item id: {self.id}"

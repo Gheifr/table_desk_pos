@@ -1,6 +1,6 @@
 [
   {
-    "model": "planning.property",
+    "model": "point_of_sale.property",
     "pk": 1,
     "fields": {
       "name": "Main Property",
@@ -9,7 +9,7 @@
   },
 
   {
-    "model": "planning.employee",
+    "model": "accounts.employee",
     "pk": 1,
     "fields": {
       "username": "alice",
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "planning.employee",
+    "model": "accounts.employee",
     "pk": 2,
     "fields": {
       "username": "bob",
@@ -39,7 +39,7 @@
     }
   },
   {
-    "model": "planning.employee",
+    "model": "accounts.employee",
     "pk": 3,
     "fields": {
       "username": "carol",
@@ -55,7 +55,7 @@
   },
 
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 1,
     "fields": {
       "property": 1,
@@ -65,7 +65,7 @@
     }
   },
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 2,
     "fields": {
       "property": 1,
@@ -75,7 +75,7 @@
     }
   },
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 3,
     "fields": {
       "property": 1,
@@ -85,7 +85,7 @@
     }
   },
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 4,
     "fields": {
       "property": 1,
@@ -95,7 +95,7 @@
     }
   },
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 5,
     "fields": {
       "property": 1,
@@ -105,7 +105,7 @@
     }
   },
   {
-    "model": "planning.table",
+    "model": "point_of_sale.table",
     "pk": 6,
     "fields": {
       "property": 1,
@@ -116,7 +116,7 @@
   },
 
   {
-    "model": "planning.menu",
+    "model": "menu.menu",
     "pk": 1,
     "fields": {
       "name": "Main Menu",
@@ -126,7 +126,7 @@
   },
 
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 1,
     "fields": {
       "name": "Espresso",
@@ -137,7 +137,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 2,
     "fields": {
       "name": "Americano",
@@ -148,7 +148,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 3,
     "fields": {
       "name": "Cappuccino",
@@ -159,7 +159,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 4,
     "fields": {
       "name": "Latte",
@@ -170,7 +170,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 5,
     "fields": {
       "name": "Tea Black",
@@ -182,7 +182,7 @@
   },
 
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 6,
     "fields": {
       "name": "Tea Green",
@@ -193,7 +193,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 7,
     "fields": {
       "name": "Orange Juice",
@@ -204,7 +204,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 8,
     "fields": {
       "name": "Lemonade",
@@ -215,7 +215,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 9,
     "fields": {
       "name": "Mineral Water Still",
@@ -226,7 +226,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 10,
     "fields": {
       "name": "Mineral Water Sparkling",
@@ -238,7 +238,7 @@
   },
 
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 11,
     "fields": {
       "name": "Tomato Soup",
@@ -249,7 +249,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 12,
     "fields": {
       "name": "Chicken Soup",
@@ -260,7 +260,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 13,
     "fields": {
       "name": "Bruschetta",
@@ -271,7 +271,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 14,
     "fields": {
       "name": "Caesar Salad",
@@ -282,7 +282,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 15,
     "fields": {
       "name": "Greek Salad",
@@ -294,7 +294,7 @@
   },
 
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 16,
     "fields": {
       "name": "Margherita Pizza",
@@ -305,7 +305,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 17,
     "fields": {
       "name": "Pepperoni Pizza",
@@ -316,7 +316,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 18,
     "fields": {
       "name": "Grilled Chicken",
@@ -327,7 +327,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 19,
     "fields": {
       "name": "Beef Steak",
@@ -338,7 +338,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 20,
     "fields": {
       "name": "Pasta Carbonara",
@@ -350,7 +350,7 @@
   },
 
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 21,
     "fields": {
       "name": "Pasta Bolognese",
@@ -361,7 +361,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 22,
     "fields": {
       "name": "Kids Nuggets",
@@ -372,7 +372,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 23,
     "fields": {
       "name": "Kids Pasta",
@@ -383,7 +383,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 24,
     "fields": {
       "name": "Ice Cream",
@@ -394,7 +394,7 @@
     }
   },
   {
-    "model": "planning.menuitem",
+    "model": "menu.menuitem",
     "pk": 25,
     "fields": {
       "name": "Cheesecake",

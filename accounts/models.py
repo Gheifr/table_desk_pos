@@ -10,3 +10,9 @@ class Employee(AbstractUser):
         blank=True,
         related_name="employees",
     )
+
+    def __str__(self):
+        full_name = self.get_full_name() or self.username
+        if self.position:
+            return f"{full_name} ({self.position})"
+        return full_name

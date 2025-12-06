@@ -6,6 +6,9 @@ class Property(models.Model):
     name = models.CharField(max_length=255)
     number_tables = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.name
+
 
 class Table(models.Model):
     property = models.ForeignKey(
@@ -23,7 +26,11 @@ class Table(models.Model):
         blank=True,
     )
 
+    def __str__(self):
+        return f"Table No: {self.table_number}, {f"orders: {self.orders.count()}" if self.orders else ""}"
+
     class Meta:
+        ordering = ["table_number"]
         # unique table number per property
         constraints = [
             models.UniqueConstraint(
