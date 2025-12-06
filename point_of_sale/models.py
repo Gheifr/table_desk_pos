@@ -1,5 +1,7 @@
 from django.db import models
 
+from accounts.models import Employee
+
 
 class Property(models.Model):
     name = models.CharField(max_length=255)
