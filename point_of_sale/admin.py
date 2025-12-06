@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from models import Property, Table
+from .models import Property, Table
 
 
 @admin.register(Property)

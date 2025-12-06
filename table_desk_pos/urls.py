@@ -16,8 +16,18 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+from table_desk_pos.views import index
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+  path("admin/", admin.site.urls),
+  path("accounts/", include("django.contrib.auth.urls")),
+  path("", index, name="index"),
+  path("menus/", include("menu.urls", namespace="menus")),
+  path("orders/", include("ordering.urls", namespace="orders")),
+  path("point-of-sale/", include("point_of_sale.urls", namespace="point_of_sale")),
+  path("staff/", include("accounts.urls", namespace="accounts")),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

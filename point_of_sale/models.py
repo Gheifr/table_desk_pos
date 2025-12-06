@@ -1,6 +1,5 @@
+from django.conf import settings
 from django.db import models
-
-from accounts.models import Employee
 
 
 class Property(models.Model):
@@ -19,7 +18,7 @@ class Table(models.Model):
     is_active = models.BooleanField(default=True)
 
     employees = models.ManyToManyField(
-        Employee,
+        settings.AUTH_USER_MODEL,
         related_name="tables",
         blank=True,
     )

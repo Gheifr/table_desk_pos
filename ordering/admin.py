@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ordering.models import OrderItem, Order
+from .models import OrderItem, Order
 
 
 @admin.register(OrderItem)
