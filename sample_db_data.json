@@ -1,0 +1,407 @@
+[
+  {
+    "model": "planning.property",
+    "pk": 1,
+    "fields": {
+      "name": "Main Property",
+      "number_tables": 10
+    }
+  },
+
+  {
+    "model": "planning.employee",
+    "pk": 1,
+    "fields": {
+      "username": "alice",
+      "first_name": "Alice",
+      "last_name": "Waiter",
+      "email": "alice@example.com",
+      "position": "Waiter",
+      "properties": [1],
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.employee",
+    "pk": 2,
+    "fields": {
+      "username": "bob",
+      "first_name": "Bob",
+      "last_name": "Bartender",
+      "email": "bob@example.com",
+      "position": "Bartender",
+      "properties": [1],
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.employee",
+    "pk": 3,
+    "fields": {
+      "username": "carol",
+      "first_name": "Carol",
+      "last_name": "Manager",
+      "email": "carol@example.com",
+      "position": "Manager",
+      "properties": [1],
+      "is_staff": true,
+      "is_superuser": false,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "planning.table",
+    "pk": 1,
+    "fields": {
+      "property": 1,
+      "table_number": 1,
+      "max_guests_num": 2,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.table",
+    "pk": 2,
+    "fields": {
+      "property": 1,
+      "table_number": 2,
+      "max_guests_num": 2,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.table",
+    "pk": 3,
+    "fields": {
+      "property": 1,
+      "table_number": 3,
+      "max_guests_num": 4,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.table",
+    "pk": 4,
+    "fields": {
+      "property": 1,
+      "table_number": 4,
+      "max_guests_num": 4,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.table",
+    "pk": 5,
+    "fields": {
+      "property": 1,
+      "table_number": 5,
+      "max_guests_num": 6,
+      "is_active": true
+    }
+  },
+  {
+    "model": "planning.table",
+    "pk": 6,
+    "fields": {
+      "property": 1,
+      "table_number": 6,
+      "max_guests_num": 6,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "planning.menu",
+    "pk": 1,
+    "fields": {
+      "name": "Main Menu",
+      "is_active": true,
+      "properties": [1]
+    }
+  },
+
+  {
+    "model": "planning.menuitem",
+    "pk": 1,
+    "fields": {
+      "name": "Espresso",
+      "menu_section": "drinks",
+      "price": "2.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 2,
+    "fields": {
+      "name": "Americano",
+      "menu_section": "drinks",
+      "price": "2.80",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 3,
+    "fields": {
+      "name": "Cappuccino",
+      "menu_section": "drinks",
+      "price": "3.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 4,
+    "fields": {
+      "name": "Latte",
+      "menu_section": "drinks",
+      "price": "3.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 5,
+    "fields": {
+      "name": "Tea Black",
+      "menu_section": "drinks",
+      "price": "2.00",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+
+  {
+    "model": "planning.menuitem",
+    "pk": 6,
+    "fields": {
+      "name": "Tea Green",
+      "menu_section": "drinks",
+      "price": "2.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 7,
+    "fields": {
+      "name": "Orange Juice",
+      "menu_section": "drinks",
+      "price": "3.00",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 8,
+    "fields": {
+      "name": "Lemonade",
+      "menu_section": "drinks",
+      "price": "3.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 9,
+    "fields": {
+      "name": "Mineral Water Still",
+      "menu_section": "drinks",
+      "price": "1.80",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 10,
+    "fields": {
+      "name": "Mineral Water Sparkling",
+      "menu_section": "drinks",
+      "price": "1.90",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+
+  {
+    "model": "planning.menuitem",
+    "pk": 11,
+    "fields": {
+      "name": "Tomato Soup",
+      "menu_section": "starters",
+      "price": "4.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 12,
+    "fields": {
+      "name": "Chicken Soup",
+      "menu_section": "starters",
+      "price": "4.80",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 13,
+    "fields": {
+      "name": "Bruschetta",
+      "menu_section": "starters",
+      "price": "5.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 14,
+    "fields": {
+      "name": "Caesar Salad",
+      "menu_section": "salads",
+      "price": "7.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 15,
+    "fields": {
+      "name": "Greek Salad",
+      "menu_section": "salads",
+      "price": "7.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+
+  {
+    "model": "planning.menuitem",
+    "pk": 16,
+    "fields": {
+      "name": "Margherita Pizza",
+      "menu_section": "mains",
+      "price": "9.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 17,
+    "fields": {
+      "name": "Pepperoni Pizza",
+      "menu_section": "mains",
+      "price": "10.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 18,
+    "fields": {
+      "name": "Grilled Chicken",
+      "menu_section": "mains",
+      "price": "11.00",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 19,
+    "fields": {
+      "name": "Beef Steak",
+      "menu_section": "mains",
+      "price": "14.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 20,
+    "fields": {
+      "name": "Pasta Carbonara",
+      "menu_section": "mains",
+      "price": "10.20",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+
+  {
+    "model": "planning.menuitem",
+    "pk": 21,
+    "fields": {
+      "name": "Pasta Bolognese",
+      "menu_section": "mains",
+      "price": "10.30",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 22,
+    "fields": {
+      "name": "Kids Nuggets",
+      "menu_section": "kids",
+      "price": "6.00",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 23,
+    "fields": {
+      "name": "Kids Pasta",
+      "menu_section": "kids",
+      "price": "5.80",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 24,
+    "fields": {
+      "name": "Ice Cream",
+      "menu_section": "desserts",
+      "price": "3.50",
+      "is_active": true,
+      "menus": [1]
+    }
+  },
+  {
+    "model": "planning.menuitem",
+    "pk": 25,
+    "fields": {
+      "name": "Cheesecake",
+      "menu_section": "desserts",
+      "price": "4.80",
+      "is_active": true,
+      "menus": [1]
+    }
+  }
+]

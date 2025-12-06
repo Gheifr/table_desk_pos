@@ -1,0 +1,76 @@
+table_desk_pos/
+├─ manage.py
+├─ requirements.txt           
+├─ README.md                 
+│
+├─ table_desk_pos/           # головний django-проєкт
+│  ├─ __init__.py
+│  ├─ settings.py
+│  ├─ urls.py                
+│  ├─ wsgi.py
+│  └─ asgi.py
+│
+├─ accounts/                 # кастомний юзер + аутентифікація
+│  ├─ __init__.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py              # Employee(AbstractUser)
+│  ├─ forms.py               
+│  ├─ urls.py
+│  ├─ views.py               
+│  ├─ tests.py
+│  └─ migrations/
+│      └─ __init__.py
+│
+├─ ordering/                 # замовлення, позиції замовлення
+│  ├─ __init__.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py              # Order, OrderItem
+│  ├─ urls.py
+│  ├─ views.py               
+│  ├─ tests.py
+│  └─ migrations/
+│      └─ __init__.py
+│
+├─ menu/                     # меню та позиції меню
+│  ├─ __init__.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py              # Menu, MenuItem
+│  ├─ urls.py
+│  ├─ views.py               
+│  ├─ tests.py
+│  └─ migrations/
+│      └─ __init__.py
+│
+├─ point_of_sale/            # property + tables (зал, столи)
+│  ├─ __init__.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py              # Property, Table
+│  ├─ urls.py
+│  ├─ views.py               
+│  ├─ tests.py
+│  └─ migrations/
+│      └─ __init__.py
+│
+├─ templates/                
+│  ├─ base.html
+│  ├─ accounts/
+│  │   ├─ login.html
+│  │   └─ employee_detail.html
+│  ├─ ordering/
+│  │   ├─ order_list.html
+│  │   └─ order_detail.html
+│  ├─ menu/
+│  │   ├─ menu_list.html
+│  │   └─ menuitem_list.html
+│  └─ point_of_sale/
+│      ├─ property_list.html
+│      └─ table_list.html
+│
+└─ static/                   
+   ├─ css/
+   ├─ js/
+   └─ img/
