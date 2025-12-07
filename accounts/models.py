@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class Employee(AbstractUser):
@@ -16,3 +17,6 @@ class Employee(AbstractUser):
         if self.position:
             return f"{full_name} ({self.position})"
         return full_name
+
+    def get_absolute_url(self):
+        return reverse("accounts:staff-detail", kwargs={"pk": self.pk})
