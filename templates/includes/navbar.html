@@ -15,15 +15,20 @@
           <a class="nav-link" href="{% url 'orders:index' %}">Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'menus:index' %}">Menu</a>
+          <a class="nav-link" href="{% url 'menus:index' %}">Menus</a>
         </li>
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link active"
-                                      href="{% url 'accounts:staff-detail' user.id %}">Hi, {{ user.username }}</a>
+                                  href="{% url 'accounts:staff-detail' user.id %}">Hi, {{ user.username }}</a>
           </li>
+          {% if user.is_superuser %}
+            <li class="nav-item"><a class="nav-link active"
+                                  href="{% url 'admin:index' %}">Control panel</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             {% include 'registration/logout.html' %}
           </li>
