@@ -1,20 +1,26 @@
 {% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% load crispy_forms_filters static %}
 
 {% block content %}
-  <div class="container">
-    <h1>Login</h1>
-  </div>
+  <section class="td-hero d-flex align-items-center justify-content-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}'); padding-bottom: 10px">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <h1>Login</h1>
 
-  <div class="container">
-      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
         <form method="post" action="{% url 'login' %}">
           {% csrf_token %}
           {{ form|crispy }}
 
-          <input type="submit" class="btn btn-light" value="Submit">
-          <input type="hidden" name="next" value="{{ next }}">
+          <input type="submit"
+                 class="btn btn-light"
+                 value="Submit"
+                 style="background-color: lightgrey"
+          >
+          <input type="hidden"
+                 name="next"
+                 value="{{ next }}">
         </form>
       </div>
-  </div>
+  </section>
 {% endblock %}
