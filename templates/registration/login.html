@@ -2,35 +2,19 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Login</h1>
+  <div class="container">
+    <h1>Login</h1>
+  </div>
 
+  <div class="container">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
 
-  {% if form.errors %}
-    <div class="alert alert-danger" role="alert">Invalid credentials</div>
-  {% endif %}
-
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ crispy }}
-    <div class="container-fluid">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Username</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Username"
-               aria-describedby="basic-addon1" name="username"/>
+          <input type="submit" class="btn btn-light" value="Submit">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
       </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Password</span>
-        </div>
-        <input type="password" class="form-control" aria-label="Username"
-               aria-describedby="basic-addon1" name="password"/>
-      </div>
-      <div class="input-group mb-3">
-        <input type="submit" value="Submit" class="btn btn-light">
-        <input type="hidden" name="next" value="{{ next }}"/>
-      </div>
-    </div>
-  </form>
+  </div>
 {% endblock %}

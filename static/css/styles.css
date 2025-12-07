@@ -1,0 +1,63 @@
+:root {
+  /* Підігнати під реальні розміри, але для Bootstrap зазвичай близько до правди */
+  --td-nav-height: 56px;
+  --td-footer-height: 40px;
+}
+
+main.flex-grow-1 {
+    display: flex;
+}
+
+
+main.flex-grow-1 > .container-fluid {
+    flex: 1 0 auto;
+}
+
+
+main.flex-grow-1 > .container-fluid > .row {
+    min-height: 100%;
+}
+
+
+.td-hero-carousel {
+    min-height: 100%;
+}
+
+
+.td-hero-slide {
+  position: relative;
+  min-height: calc(100vh - var(--td-nav-height) - var(--td-footer-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* затемнення + контент як було */
+.td-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.td-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  padding: 1.5rem;
+}
+
+.td-hero-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: .5rem;
+}
+
+.sticky-menu-section{
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 60px;
+}
