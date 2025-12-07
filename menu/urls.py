@@ -1,10 +1,9 @@
 from django.urls import path
 
-from menu.views import index
+from menu.views import MenuIndexView
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", MenuIndexView.as_view(), name="index"),
 ]
-
 
 app_name = "menus"
