@@ -22,7 +22,7 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link active"
-                                  href="{% url 'accounts:staff-detail' user.id %}">Hi, {{ user.username }}</a>
+                                  href="{% url 'accounts:staff-detail' user.id %}">Hi, {{ user.first_name }} {{ user.last_name }}</a>
           </li>
           {% if user.is_superuser %}
             <li class="nav-item"><a class="nav-link active"
