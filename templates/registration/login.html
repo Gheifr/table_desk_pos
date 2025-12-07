@@ -5,22 +5,40 @@
   <section class="td-hero d-flex align-items-center justify-content-center"
            style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}'); padding-bottom: 10px">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-      <h1>Login</h1>
 
+      {% if form.errors %}
+        <img
+            src=" {% static 'img/gif/sad.gif' %}"
+            width="100"
+            height="100"
+            alt="Hi there!">
+        <h3>Oops, something wrong...</h3>
+      {% elif next %}
+        <img
+            src=" {% static 'img/gif/hi.gif' %} "
+            alt="Hi there!">
+        <h3>You have to log in to proceed to this page.</h3>
+      {% else %}
+        <img
+            src=" {% static 'img/gif/hi.gif' %} "
+            alt="Hi there!">
 
-        <form method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          {{ form|crispy }}
+        <h3>Enter your credentials.</h3>
+      {% endif %}
 
-          <input type="submit"
-                 class="btn btn-light"
-                 value="Submit"
-                 style="background-color: lightgrey"
-          >
-          <input type="hidden"
-                 name="next"
-                 value="{{ next }}">
-        </form>
-      </div>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input type="submit"
+               class="btn btn-light"
+               value="Submit"
+               style="background-color: lightgrey"
+        >
+        <input type="hidden"
+               name="next"
+               value="{{ next }}">
+      </form>
+    </div>
   </section>
 {% endblock %}
