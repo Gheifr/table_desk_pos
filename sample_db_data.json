@@ -10,7 +10,7 @@
 
   {
     "model": "accounts.employee",
-    "pk": 1,
+    "pk": 2,
     "fields": {
       "username": "alice",
       "first_name": "Alice",
@@ -25,7 +25,7 @@
   },
   {
     "model": "accounts.employee",
-    "pk": 2,
+    "pk": 3,
     "fields": {
       "username": "bob",
       "first_name": "Bob",
@@ -40,7 +40,7 @@
   },
   {
     "model": "accounts.employee",
-    "pk": 3,
+    "pk": 4,
     "fields": {
       "username": "carol",
       "first_name": "Carol",
