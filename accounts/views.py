@@ -16,3 +16,5 @@ class StaffDetailsView(LoginRequiredMixin, generic.DetailView):
     model = Employee
     queryset = Employee.objects.filter(is_active=True).prefetch_related("tables")
     template_name = "account/staff_detail.html"
+
+
