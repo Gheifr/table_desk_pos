@@ -27,7 +27,7 @@ class Table(models.Model):
     )
 
     def __str__(self):
-        return f"Table No: {self.table_number}, {f"orders: {self.orders.count()}" if self.orders else ""}"
+        return f"Table No: {self.table_number}, {f"seats: {self.max_guests_num}"}"
 
     class Meta:
         ordering = ["table_number"]

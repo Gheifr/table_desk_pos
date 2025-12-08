@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 mx-0 align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="col-12 col-lg-8 offset-lg-2 mt-3">
+
+      <h2>Edit order #{{ order.order_number }}</h2>
+      <p><b>Opened at:</b> {{ order.opened_at }}</p>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="container mb-1">
+          <div class="row mb-1 justify-content-end align-items-center">
+            <div class="col-1"><b>Table:</b></div>
+            <div class="col w-auto">{{ form.table }} </div>
+          </div>
+          <div class="row mb-1 justify-content-end align-items-center">
+            <div class="col-1">
+              <label for="g_qty{{ order.id }}">
+                <strong>Pax:</strong>
+              </label>
+            </div>
+            <div class="col">
+              <input id="g_qty{{ order.id }}"
+                     type="number"
+                     value="{{ order.guests_count }}"
+                     class="form-control form-control-sm w-auto"
+                     min="1"
+                     style="max-width: 80px;">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card pb-3">
+          <div class="card-body">
+            <div class="card-title d-flex justify-content-between">
+              <h5>Items</h5>
+              <button class="btn btn-outline-dark btn-sm" type="button">Add Item</button>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+              {% for item in order.order_items.all %}
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item.menu_item.name }}</h5>
+
+                      <p class="card-text mb-1">
+                        <b>Price:</b> {{ item.menu_item.price }} ₴
+                      </p>
+
+                      <div class="d-flex align-items-center justify-content-between mb-2">
+                        <label for="qty{{ item.id }}" class="me-2 mb-0">
+                          <strong>Quantity:</strong>
+                        </label>
+                        <input id="qty{{ item.id }}"
+                               type="number"
+                               value="{{ item.quantity }}"
+                               class="form-control form-control-sm w-auto"
+                               min="1"
+                               style="max-width: 80px;">
+                      </div>
+
+                      <p class="card-text d-flex justify-content-center align-items-center mb-0">
+                        <button class="btn btn-outline-dark btn-sm" type="button">Remove</button>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+
+        {{ form.order_items }}
+      </form>
+    </div>
+  </section>
+{% endblock %}

@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 from django.db import models
-from django.db.models import Max
+from django.db.models import Max, Sum, F
+from django.urls import reverse
 from django.utils import timezone
 
 from menu.models import MenuItem
@@ -25,12 +28,8 @@ class Order(models.Model):
     is_closed = models.BooleanField(default=False)
     guests_count = models.PositiveSmallIntegerField(default=1)
 
-    items = models.ManyToManyField(
-        MenuItem,
-        through="OrderItem",
-        related_name="orders",
-        blank=True,
-    )
+    def get_absolute_url(self):
+        return reverse("orders:order-detail", args=[str(self.id)])
 
     def save(self, *args, **kwargs):
         if self.order_number is None:
@@ -49,6 +48,20 @@ class Order(models.Model):
     def __str__(self):
         return f"Order No: {self.order_number}, opened at: {self.opened_at}"
 
+    @property
+    def total_amount(self) -> Decimal:
+        result = (
+            self.order_items
+            .filter(is_active=True)
+            .aggregate(
+                total=Sum(
+                    F("quantity") * F("menu_item__price")
+                )
+            )["total"]
+        )
+        return result or Decimal("0.00")
+
+
 class OrderItem(models.Model):
     is_active = models.BooleanField(default=True)
 
@@ -65,4 +78,4 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"Order Item id: {self.id}"
+        return f"Order Item id: {self.id}, {self.menu_item.name}"
