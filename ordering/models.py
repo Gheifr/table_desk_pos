@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.conf import settings
 from django.db import models
 from django.db.models import Max, Sum, F
 from django.urls import reverse
@@ -27,6 +28,12 @@ class Order(models.Model):
     closed_at = models.DateTimeField(null=True, blank=True)
     is_closed = models.BooleanField(default=False)
     guests_count = models.PositiveSmallIntegerField(default=1)
+
+    employees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="orders",
+        blank=True,
+    )
 
     def get_absolute_url(self):
         return reverse("orders:order-detail", args=[str(self.id)])

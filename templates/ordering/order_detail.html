@@ -9,7 +9,17 @@
         <h2>Order No {{ order.order_number }}</h2>
       </div>
       <div class="col-lg-4 d-flex justify-content-end align-items-center px-0 mx-1">
-        <a href="{% url 'orders:index' %}" class="btn btn-sm btn-outline-dark m-1">Back to list</a>
+
+        {% if user in order.employees.all %}
+          <a href="{% url 'orders:toggle-assignment' order.id %}" class="btn btn-sm btn-outline-warning m-1">
+            Leave Order
+          </a>
+        {% else %}
+          <a href="{% url 'orders:toggle-assignment' order.id %}" class="btn btn-sm btn-outline-success m-1">
+            Take Order
+          </a>
+        {% endif %}
+        <a href="{% url 'orders:index' %}" class="btn btn-sm btn-outline-dark m-1">To Orders list</a>
         <a href="{% url 'orders:order-edit' order.id %}" class="btn btn-sm btn-outline-dark m-1">Edit</a>
         <a href="{% url 'orders:order-delete' order.id %}" {% if not user.is_superuser %}
            tabindex="-1" aria-disabled="true" class="btn btn-sm btn-outline-danger m-1 disabled"
@@ -23,19 +33,19 @@
       <div class="row mx-1 justify-content-between">
         <div class="container-fluid px-0 mx-1 col-md-4">
           <p><b>Table:</b> {{ order.table.table_number }}</p>
-          {% if order.table.employees.count == 0 %}
+          {% if order.employees.count == 0 %}
             <p><b>Employee:</b> —</p>
-          {% elif order.table.employees.count > 1 %}
+          {% elif order.employees.count > 1 %}
             <p>
               <b>Employees:</b>
-              {% for empl in order.table.employees.all %}
+              {% for empl in order.employees.all %}
                 {{ empl.first_name }} {{ empl.last_name }}{% if not forloop.last %}, {% endif %}
               {% endfor %}
             </p>
           {% else %}
             <p>
               <b>Employee:</b>
-              {{ order.table.employees.first.first_name }} {{ order.table.employees.first.last_name }}
+              {{ order.employees.first.first_name }} {{ order.employees.first.last_name }}
             </p>
           {% endif %}
         </div>

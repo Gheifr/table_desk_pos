@@ -14,10 +14,9 @@
         <b>Username: </b>{{ employee.username }}
       </div>
     </div>
-    {% if employee.tables.all %}
-      <hr>
-      <h4>Served Orders</h4>
-
+    <hr>
+    <h4>Served Orders</h4>
+    {% if employee.orders.all %}
       <table class="table table-hover">
         <tr>
           <th>No</th>
@@ -26,27 +25,27 @@
           <th>Pax</th>
           <th>Opened at</th>
         </tr>
-        {% for table in employee.tables.all %}
-          {% if table.orders.all %}
-            {% for order in table.orders.all %}
-              {% if not order.is_closed %}
-                  <tr class="clickable-row" data-href="{% url 'orders:order-detail' order.id %}">
-                    <td>{{ order.order_number }}</td>
-                    <td>{{ table.table_number }}</td>
-                    <td>
-                      {% for item in order.order_items.all %}
-                        {{ item.menu_item.name }}<br>
-                      {% endfor %}
-                    </td>
-                    <td>{{ order.guests_count }}</td>
-                    <td>{{ order.opened_at }}</td>
-                  </tr>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
 
+        {% if employee.orders.all %}
+          {% for order in employee.orders.all %}
+            {% if not order.is_closed %}
+              <tr class="clickable-row" data-href="{% url 'orders:order-detail' order.id %}">
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.table.table_number }}</td>
+                <td>
+                  {% for item in order.order_items.all %}
+                    {{ item.menu_item.name }}<br>
+                  {% endfor %}
+                </td>
+                <td>{{ order.guests_count }}</td>
+                <td>{{ order.opened_at }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
       </table>
+      {% else %}
+      <h6>No Orders at the time</h6>
     {% endif %}
 
   </section>

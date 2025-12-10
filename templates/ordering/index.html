@@ -14,8 +14,8 @@
       </div>
     {% else %}
       <div class="container-fluid px-0 mx-1 w-100">
-          <h2>Current Open Orders</h2>
-          <hr>
+        <h2>Current Open Orders</h2>
+        <hr>
         <table class="table table-hover">
           <tr>
             <th>Number</th>
@@ -31,12 +31,12 @@
                 <td>{{ order.table.table_number }}</td>
                 <td>{{ order.guests_count }}</td>
                 <td>
-                  {% if order.table.employees.count > 1 %}
-                    {% for empl in order.table.employees.all %}
+                  {% if order.employees.count > 1 %}
+                    {% for empl in order.employees.all %}
                       {{ empl.first_name }} {{ empl.last_name }}<br>
                     {% endfor %}
                   {% else %}
-                    {{ order.table.employees.first.first_name }} {{ order.table.employees.first.last_name }}
+                    {{ order.employees.first.first_name }} {{ order.employees.first.last_name }}
                   {% endif %}
                 </td>
                 <td>{{ order.opened_at }}</td>

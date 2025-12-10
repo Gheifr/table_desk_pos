@@ -14,7 +14,7 @@ def index(request: HttpRequest):
 
 class StaffDetailsView(LoginRequiredMixin, generic.DetailView):
     model = Employee
-    queryset = Employee.objects.filter(is_active=True).prefetch_related("tables")
+    queryset = Employee.objects.filter(is_active=True)
     template_name = "account/staff_detail.html"
 
 

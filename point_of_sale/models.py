@@ -20,12 +20,6 @@ class Table(models.Model):
     max_guests_num = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
 
-    employees = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="tables",
-        blank=True,
-    )
-
     def __str__(self):
         return f"Table No: {self.table_number}, {f"seats: {self.max_guests_num}"}"
 
