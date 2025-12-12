@@ -1,21 +1,28 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.db.models import Sum, QuerySet
+from django.db.models import Sum
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views import generic
 
-from menu.models import MenuItem
-from ordering.forms import OrderForm, OrderItemCreateForm
+from ordering.forms import OrderForm, OrderItemCreateForm, OrderCreateForm
 from ordering.models import Order, OrderItem
 
 
 @login_required
 def index(request: HttpRequest):
-    return render(request, "ordering/index.html",
-                  {"orders": Order.objects.prefetch_related("employees").select_related("table").all()})
+    orders = Order.objects.select_related("table").all()
+    form = OrderCreateForm()
+    return render(
+        request,
+        "ordering/index.html",
+        {
+            "orders": orders,
+            "form": form
+        }
+    )
 
 
 class OrderDetailView(LoginRequiredMixin, generic.DetailView):
@@ -25,7 +32,8 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
 
 class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Order
-    pass
+    queryset = Order.objects.prefetch_related("employees")
+    success_url = reverse_lazy("orders:index")
 
 
 def combine_items(order):
@@ -55,6 +63,34 @@ def combine_items(order):
 
         if rest:
             order.order_items.filter(id__in=[oi.id for oi in rest]).delete()
+
+
+@login_required()
+def order_create(request: HttpRequest):
+    if request.method == "POST":
+
+        # If user canceled creation, skip validation and use PRG:
+        # redirect to index so the last request is GET (no "resubmit form" on refresh)
+        if request.POST.get("is_cancelled"):
+            return redirect("orders:index")
+
+        form = OrderCreateForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.employees.add(request.user)
+            return redirect("orders:order-edit", pk=order.pk)
+        else:
+            orders = Order.objects.select_related("table").all()
+            return render(
+                request,
+                "ordering/index.html",
+                {
+                    "form": form,
+                    "orders": orders,
+                }
+            )
+
+    return redirect("orders:index")
 
 
 @login_required

@@ -52,6 +52,12 @@ class Order(models.Model):
             self.closed_at = timezone.now()
             self.save()
 
+    def delete(self):
+        self.close()
+        self.order_items.remove()
+        self.save()
+
+
     def __str__(self):
         return f"Order No: {self.order_number}, opened at: {self.opened_at}"
 
@@ -74,7 +80,8 @@ class OrderItem(models.Model):
 
     order = models.ForeignKey(
         Order,
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name="order_items",
     )
     menu_item = models.ForeignKey(
@@ -86,3 +93,12 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"Order Item id: {self.id}, {self.menu_item.name}"
+
+    @property
+    def item_cost(self) -> Decimal:
+        return self.quantity * self.menu_item.price or Decimal("0.00")
+
+
+    def delete(self, using = None, keep_parents = False):
+        self.is_active = False
+        super().save()

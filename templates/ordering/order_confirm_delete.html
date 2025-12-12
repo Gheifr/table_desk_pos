@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% load crispy_forms_filters static %}
+{% block content %}
+  <section class="py-4 d-flex align-items-center justify-content-center w-100"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="row align-items-center">
+      <h1>Confirm Order Delete?</h1>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if order.order_items.all %}
+          <table class="table table-bordered border-light-subtle bg-transparent">
+            <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.order_items.all %}
+            <tr>
+              <td>{{ item.menu_item.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.menu_item.price|floatformat:2 }} ₴</td>
+              <td>{{ item.item_cost|floatformat:2 }} ₴</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td></td>
+              <td></td>
+              <td><strong>Total:</strong></td>
+              <td>{{ order.total_amount|floatformat:2 }} ₴</td>
+            </tr>
+            </tbody>
+          </table>
+        {% endif %}
+        <div class="d-flex justify-content-between">
+          <input type="submit" value="Yes" class="btn btn-outline-danger" style="min-width: 100px">
+          <button type="button"
+                  class="btn btn-outline-dark "
+                  style="min-width: 100px"
+                  onclick="history.back()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
