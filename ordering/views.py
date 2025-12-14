@@ -126,7 +126,7 @@ def order_update(request, pk):
                 if order.order_items:
                     combine_items(order)
 
-            return redirect("orders:order-detail", pk=order.pk)
+            return redirect("orders:index")
     else:
         form = OrderForm(instance=order)
 
