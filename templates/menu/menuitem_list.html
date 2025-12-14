@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 mx-0 align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="row justify-content-between">
+      <div class="col-3">
+        <h2>Menu Items</h2>
+      </div>
+      <div class="col-3 d-flex justify-content-end align-items-center">
+        <a class="btn btn-outline-dark"
+           href="{% url 'menus:item-create' %}">
+          Create new
+        </a>
+      </div>
+    </div>
+    <div class="row d-inline justify-content-end">
+      <div class="row d-flex justify-content-end">
+        <form action="" method="get">
+          Search:
+          {{ search_form }}
+          <input type="submit" value="🔎" class="btn btn-outline-secondary btn-sm">
+        </form>
+      </div>
+    </div>
+    {% if menuitem_list %}
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Menu section</th>
+          <th>Price</th>
+          <th>Menu(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in menuitem_list %}
+          <tr class="clickable-row" data-href="{% url 'menus:item-detail' item.id %}">
+            <td class="w-25">{{ item.name }}</td>
+            <td class="w-25">{{ item.menu_section }}</td>
+            <td class="w-25">{{ item.price|floatformat:2 }} ₴</td>
+            <td class="w-25">
+              {% if item.menus.count > 1 %}
+                {% for menu in item.menus.all %}
+                  → {{ menu.name }}<br>
+                {% endfor %}
+              {% else %}
+                {{ item.menus.first.name }}
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      No items
+    {% endif %}
+    {% include "includes/pagination.html" %}
+  </section>
+{% endblock %}

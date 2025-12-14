@@ -1,8 +1,5 @@
 from django import forms
-from django.db.models import fields
 
-from accounts.models import Employee
-from point_of_sale.models import Table
 from .models import Order, OrderItem
 
 
@@ -38,9 +35,6 @@ class OrderItemCreateForm(forms.ModelForm):
 
 
 class OrderCreateForm(forms.ModelForm):
-    # hidden field in order to avoid
-    # browser attempts to resend data when there were
-    # form errors and user cancels order creation
     is_cancelled = forms.BooleanField(
         required=False,
         widget=forms.HiddenInput()
