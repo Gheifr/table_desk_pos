@@ -11,12 +11,12 @@ class MenuItemForm(forms.ModelForm):
             "is_active": forms.CheckboxInput(attrs={"class": "form-check-inline-dark"}),
             "menus": forms.CheckboxSelectMultiple(attrs={
                 "class": "form-check-inline-dark"}),
-            "price": forms.NumberInput(),
+            "price": forms.NumberInput(attrs={"min":0, "value":0}),
         }
 
 class MenuItemSearchForm(forms.Form):
     search_field_menu_item = forms.CharField(
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by name"}),
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"},),
     )

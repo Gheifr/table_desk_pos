@@ -132,3 +132,7 @@ def menu_item_create(request):
     else:
         form = MenuItemForm()
         return render(request, "menu/menuitem_form.html", {"form": form})
+
+
+class MenuItemConfirmDelete(LoginRequiredMixin, generic.DeleteView):
+    model = MenuItem
