@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.shortcuts import redirect, get_object_or_404, render
-from django.urls import reverse_lazy
 from django.views import generic
 
 from menu.forms import MenuItemForm, MenuItemSearchForm
@@ -85,6 +84,7 @@ class MenuItemListView(LoginRequiredMixin, generic.ListView):
             )
         return queryset
 
+
 @login_required()
 def menu_item_update(request, pk):
     menu_item = get_object_or_404(
@@ -105,7 +105,6 @@ def menu_item_update(request, pk):
                     if not menu_item in menu.items.all():
                         menu.items.add(menu_item)
 
-
         return redirect("menus:item-index")
     else:
         form = MenuItemForm(instance=menu_item)
@@ -118,6 +117,7 @@ def menu_item_update(request, pk):
             "form": form,
         }
     )
+
 
 @login_required()
 def menu_item_create(request):
@@ -134,5 +134,36 @@ def menu_item_create(request):
         return render(request, "menu/menuitem_form.html", {"form": form})
 
 
-class MenuItemConfirmDelete(LoginRequiredMixin, generic.DeleteView):
-    model = MenuItem
+@login_required()
+def menu_item_try_delete(request, pk):
+    menu_item = get_object_or_404(MenuItem.objects.all(), pk=pk)
+
+    if request.method == "GET":
+        return render(
+            request,
+            'menu/menuitem_confirm_delete.html',
+            {
+                "menuitem": menu_item,
+            }
+        )
+    else:
+        if menu_item.menus.all().count() > 0:
+            return redirect("menus:item-confirm-delete-in-menu", pk=menu_item.pk)
+        else:
+            menu_item.delete()
+        return redirect("menus:item-index")
+
+
+@login_required()
+def menu_item_confirm_delete(request, pk):
+    menu_item = get_object_or_404(MenuItem.objects.all(), pk=pk)
+
+    if request.method == "GET":
+        return render(request, "menu/menuitem_confirm_delete_in_menu.html", {"menuitem": menu_item})
+    else:
+        for menu in menu_item.menus.all():
+            menu_item.menus.remove(menu)
+
+        menu_item.delete()
+
+    return redirect("menus:item-index")

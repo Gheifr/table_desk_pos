@@ -13,7 +13,7 @@ from ordering.models import Order, OrderItem
 
 @login_required
 def index(request: HttpRequest):
-    orders = Order.objects.select_related("table").all()
+    orders = Order.objects.filter(is_closed=False).select_related("table").prefetch_related("employees")
     form = OrderCreateForm()
     return render(
         request,

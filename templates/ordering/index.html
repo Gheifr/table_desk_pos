@@ -4,13 +4,21 @@
 {% block content %}
   <section class="py-4 mx-0 align-items-center"
            style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
-    {% if not orders %}
+    {% if orders.count == 0 %}
       <div class="td-hero d-flex align-items-center justify-content-center">
         <h3>No orders yet</h3>
       </div>
       <br>
       <div class="td-hero d-flex align-items-center justify-content-center">
         <img src="{% static 'img/gif/nothing_here.gif' %}" alt="No orders"/>
+      </div>
+      <div class="d-flex align-items-center justify-content-center m-5">
+        <button class="btn btn-outline-success btn-lg"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addOrderModal">
+          Create first one! 😊
+        </button>
       </div>
     {% else %}
       <div class="container-fluid px-0 mx-1 w-100">
