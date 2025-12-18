@@ -7,7 +7,26 @@
       "number_tables": 10
     }
   },
-
+  {
+    "model": "accounts.employee",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$BqvCqpJ41I5ii4O7BZzFA7$1LfQ8qgFQpgD3BeGVlulCM9Hh2ByBoxv/h+3PwKwBNI=",
+      "last_login": "2025-12-18T10:34:31.875Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "Adminenko",
+      "email": "admin@here.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-12-06T16:33:20Z",
+      "position": "SuperAdmin",
+      "groups": [],
+      "user_permissions": [],
+      "properties": [1]
+    }
+  },
   {
     "model": "accounts.employee",
     "pk": 2,
@@ -17,7 +36,9 @@
       "last_name": "Waiter",
       "email": "alice@example.com",
       "position": "Waiter",
-      "properties": [1],
+      "properties": [
+        1
+      ],
       "is_staff": false,
       "is_superuser": false,
       "is_active": true
@@ -32,7 +53,9 @@
       "last_name": "Bartender",
       "email": "bob@example.com",
       "position": "Bartender",
-      "properties": [1],
+      "properties": [
+        1
+      ],
       "is_staff": false,
       "is_superuser": false,
       "is_active": true
@@ -47,13 +70,14 @@
       "last_name": "Manager",
       "email": "carol@example.com",
       "position": "Manager",
-      "properties": [1],
+      "properties": [
+        1
+      ],
       "is_staff": true,
       "is_superuser": false,
       "is_active": true
     }
   },
-
   {
     "model": "point_of_sale.table",
     "pk": 1,
@@ -114,17 +138,17 @@
       "is_active": true
     }
   },
-
   {
     "model": "menu.menu",
     "pk": 1,
     "fields": {
       "name": "Main Menu",
       "is_active": true,
-      "properties": [1]
+      "properties": [
+        1
+      ]
     }
   },
-
   {
     "model": "menu.menuitem",
     "pk": 1,
@@ -133,7 +157,9 @@
       "menu_section": "drinks",
       "price": "2.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -144,7 +170,9 @@
       "menu_section": "drinks",
       "price": "2.80",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -155,7 +183,9 @@
       "menu_section": "drinks",
       "price": "3.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -166,7 +196,9 @@
       "menu_section": "drinks",
       "price": "3.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -177,10 +209,11 @@
       "menu_section": "drinks",
       "price": "2.00",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
-
   {
     "model": "menu.menuitem",
     "pk": 6,
@@ -189,7 +222,9 @@
       "menu_section": "drinks",
       "price": "2.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -200,7 +235,9 @@
       "menu_section": "drinks",
       "price": "3.00",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -211,7 +248,9 @@
       "menu_section": "drinks",
       "price": "3.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -222,7 +261,9 @@
       "menu_section": "drinks",
       "price": "1.80",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -233,10 +274,11 @@
       "menu_section": "drinks",
       "price": "1.90",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
-
   {
     "model": "menu.menuitem",
     "pk": 11,
@@ -245,7 +287,9 @@
       "menu_section": "starters",
       "price": "4.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -256,7 +300,9 @@
       "menu_section": "starters",
       "price": "4.80",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -267,7 +313,9 @@
       "menu_section": "starters",
       "price": "5.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -278,7 +326,9 @@
       "menu_section": "salads",
       "price": "7.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -289,10 +339,11 @@
       "menu_section": "salads",
       "price": "7.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
-
   {
     "model": "menu.menuitem",
     "pk": 16,
@@ -301,7 +352,9 @@
       "menu_section": "mains",
       "price": "9.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -312,7 +365,9 @@
       "menu_section": "mains",
       "price": "10.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -323,7 +378,9 @@
       "menu_section": "mains",
       "price": "11.00",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -334,7 +391,9 @@
       "menu_section": "mains",
       "price": "14.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -345,10 +404,11 @@
       "menu_section": "mains",
       "price": "10.20",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
-
   {
     "model": "menu.menuitem",
     "pk": 21,
@@ -357,7 +417,9 @@
       "menu_section": "mains",
       "price": "10.30",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -368,7 +430,9 @@
       "menu_section": "kids",
       "price": "6.00",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -379,7 +443,9 @@
       "menu_section": "kids",
       "price": "5.80",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -390,7 +456,9 @@
       "menu_section": "desserts",
       "price": "3.50",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   },
   {
@@ -401,7 +469,9 @@
       "menu_section": "desserts",
       "price": "4.80",
       "is_active": true,
-      "menus": [1]
+      "menus": [
+        1
+      ]
     }
   }
 ]
