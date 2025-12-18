@@ -9,12 +9,13 @@ from accounts.models import Employee
 
 @login_required
 def index(request: HttpRequest):
-    return render(request, "account/index.html")
+    return render(
+        request,
+        "account/index.html",
+    )
 
 
 class StaffDetailsView(LoginRequiredMixin, generic.DetailView):
     model = Employee
     queryset = Employee.objects.filter(is_active=True)
     template_name = "account/staff_detail.html"
-
-

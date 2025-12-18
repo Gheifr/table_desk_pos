@@ -22,5 +22,5 @@ class EmployeeAdmin(UserAdmin):
                     )
                 },
             ),
-        )
+        ),
     )
