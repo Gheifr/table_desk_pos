@@ -8,11 +8,22 @@
 ## Installing / Getting started
 
 Try it locally:
+- Fork and clone the repository.
+- Create and activate a virtual environment.
+- Install dependencies from requirements.txt
 ```shell
 pip install -r requirements.txt
+```
+- Create a database (or use the default SQLite).
+- Run migrations
+```shell
 python manage.py migrate
+```
+- Load sample data
+```shell
 python manage.py loaddata sample_db_data_w_su.json
 ```
+- 
 
 This will install all required modules and create a sample database with _admin_ user who has the password same as name.
 
