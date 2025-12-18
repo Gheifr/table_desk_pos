@@ -52,7 +52,6 @@ class OrderCreateForm(forms.ModelForm):
             "total_amount": forms.TextInput(attrs={"type": "number", "class": "form-control form-control-sm"}),
         }
 
-
     def clean_table(self):
         table = self.cleaned_data.get("table")
         if table is None:

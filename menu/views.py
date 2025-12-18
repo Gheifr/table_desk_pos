@@ -73,7 +73,7 @@ def menu_create(request):
     return render(
         request,
         "menu/menu_form.html",
-        context
+        context,
     )
 
 
@@ -104,7 +104,7 @@ def menu_update(request, pk):
     return render(
         request,
         "menu/menu_form.html",
-        context
+        context,
     )
 
 
@@ -119,7 +119,7 @@ def menu_delete(request, pk):
         request,
         "menu/menu_confirm_delete.html",
         {
-            "menu": menu}
+            "menu": menu},
     )
 
 
@@ -185,7 +185,7 @@ def menu_item_update(request, pk):
         {
             "menu_item": menu_item,
             "form": form,
-        }
+        },
     )
 
 
@@ -197,11 +197,19 @@ def menu_item_create(request):
             form.save()
             return redirect("menus:item-index")
         else:
-            return render(request, "menu/menuitem_form.html", {"form": form})
+            return render(
+                request,
+                "menu/menuitem_form.html",
+                {"form": form},
+            )
 
     else:
         form = MenuItemForm()
-        return render(request, "menu/menuitem_form.html", {"form": form})
+        return render(
+            request,
+            "menu/menuitem_form.html",
+            {"form": form},
+        )
 
 
 @login_required()
@@ -214,7 +222,7 @@ def menu_item_try_delete(request, pk):
             'menu/menuitem_confirm_delete.html',
             {
                 "menuitem": menu_item,
-            }
+            },
         )
     else:
         if menu_item.menus.all().count() > 0:
@@ -229,7 +237,11 @@ def menu_item_confirm_delete(request, pk):
     menu_item = get_object_or_404(MenuItem.objects.all(), pk=pk)
 
     if request.method == "GET":
-        return render(request, "menu/menuitem_confirm_delete_in_menu.html", {"menuitem": menu_item})
+        return render(
+            request,
+            "menu/menuitem_confirm_delete_in_menu.html",
+            {"menuitem": menu_item},
+        )
     else:
         for menu in menu_item.menus.all():
             menu_item.menus.remove(menu)

@@ -21,7 +21,7 @@ def index(request: HttpRequest):
         {
             "orders": orders,
             "form": form
-        }
+        },
     )
 
 
@@ -87,7 +87,7 @@ def order_create(request: HttpRequest):
                 {
                     "form": form,
                     "orders": orders,
-                }
+                },
             )
 
     return redirect("orders:index")
@@ -149,7 +149,10 @@ def order_item_remove(request, order_pk, item_pk):
     if request.method == "POST":
         order_item.delete()
 
-    return redirect("orders:order-edit", pk=order.pk)
+    return redirect(
+        "orders:order-edit",
+        pk=order.pk,
+    )
 
 
 @login_required
@@ -163,7 +166,10 @@ def order_add_item(request, pk):
             order_item.order = order
             order_item.save()
 
-    return redirect("orders:order-edit", pk=order.pk)
+    return redirect(
+        "orders:order-edit",
+        pk=order.pk
+    )
 
 
 @login_required
@@ -175,4 +181,7 @@ def toggle_assignment(request, pk):
     else:
         order.employees.add(request.user)
 
-    return redirect("orders:order-detail", pk=order.pk)
+    return redirect(
+        "orders:order-detail",
+        pk=order.pk,
+    )

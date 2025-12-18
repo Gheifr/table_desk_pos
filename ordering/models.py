@@ -57,7 +57,6 @@ class Order(models.Model):
         self.order_items.remove()
         self.save()
 
-
     def __str__(self):
         return f"Order No: {self.order_number}, opened at: {self.opened_at}"
 
@@ -98,7 +97,6 @@ class OrderItem(models.Model):
     def item_cost(self) -> Decimal:
         return self.quantity * self.menu_item.price or Decimal("0.00")
 
-
-    def delete(self, using = None, keep_parents = False):
+    def delete(self, using=None, keep_parents=False):
         self.is_active = False
         super().save()
