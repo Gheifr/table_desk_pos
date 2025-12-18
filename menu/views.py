@@ -4,7 +4,7 @@ from django.db import transaction
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views import generic
 
-from menu.forms import MenuItemForm, MenuItemSearchForm
+from menu.forms import MenuItemForm, MenuItemSearchForm, MenuForm
 from menu.models import MenuItem, Menu
 
 
@@ -51,6 +51,76 @@ class MenuIndexView(LoginRequiredMixin, generic.ListView):
         context["sections"] = sections
         context["items_by_section"] = items_by_section
         return context
+
+
+@login_required()
+def menu_create(request):
+    if request.method == "POST":
+        form = MenuForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("menus:index")
+
+    form = MenuForm()
+    items_qs = form.fields["items"].queryset
+    item_widgets = list(form["items"])
+    items_with_widgets = list(zip(items_qs, item_widgets))
+
+    context = {
+        "form": form,
+        "items_with_widgets": items_with_widgets,
+    }
+    return render(
+        request,
+        "menu/menu_form.html",
+        context
+    )
+
+
+@login_required()
+def menu_update(request, pk):
+    menu = get_object_or_404(Menu.objects.all(), pk=pk)
+
+    if request.method == "POST":
+        menu_form = MenuForm(request.POST, instance=menu)
+        if menu_form.is_valid():
+            with transaction.atomic():
+                all_items = menu_form.cleaned_data["items"]
+                menu = menu_form.save(commit=False)
+                menu.items.set(all_items)
+
+                menu.save()
+            return redirect("menus:index")
+
+    menu_form = MenuForm(instance=menu)
+    items_qs = menu_form.fields["items"].queryset
+    item_widgets = list(menu_form["items"])
+    items_with_widgets = list(zip(items_qs, item_widgets))
+    context = {
+        "menu": menu,
+        "form": menu_form,
+        "items_with_widgets": items_with_widgets,
+    }
+    return render(
+        request,
+        "menu/menu_form.html",
+        context
+    )
+
+
+@login_required()
+def menu_delete(request, pk):
+    menu = get_object_or_404(Menu.objects.all(), pk=pk)
+    if request.method == "POST":
+        menu.delete()
+        return redirect("menus:index")
+
+    return render(
+        request,
+        "menu/menu_confirm_delete.html",
+        {
+            "menu": menu}
+    )
 
 
 @login_required

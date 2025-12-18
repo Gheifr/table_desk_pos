@@ -106,9 +106,22 @@ input[type="checkbox"].form-check-inline-dark:checked {
 }
 
 .fixed-bottom-30 {
-  position: fixed;
-  right: 0;
-  bottom: 30px;
-  left: 0;
-  z-index: 1030;
+    position: fixed;
+    right: 0;
+    bottom: 30px;
+    left: 0;
+    z-index: 1030;
+}
+
+
+.nav-tabs .nav-link {
+    color: black;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.btn-outline-dark {
+    min-width: 100px;
 }

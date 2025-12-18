@@ -12,81 +12,82 @@
             {% if menu_item.pk %}{{ menu_item.name }}{% else %}New Item{% endif %}
           </h2>
         </div>
-      <div class="col-4 d-flex justify-content-end align-items-center">
-        {% if menu_item.pk %}
-        <a href="{% url 'menus:item-delete' menu_item.pk %}" class="btn btn-outline-dark bg-danger-subtle">
-          Delete
-        </a>
-        {% endif %}
-      </div>
-      <br>
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="card pb-3">
-          <div class="card-body">
-            <div class="row mb-1 d-flex justify-content-end align-items-center">
-              <div class="col-2">
-                <strong>Name:</strong>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          {% if menu_item.pk %}
+            <a href="{% url 'menus:item-delete' menu_item.pk %}" class="btn btn-outline-dark bg-danger-subtle">
+              Delete
+            </a>
+          {% endif %}
+        </div>
+        <br>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="card pb-3">
+            <div class="card-body">
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <strong>Name:</strong>
+                </div>
+                <div class="col ">
+                  {{ form.name }}
+                </div>
               </div>
-              <div class="col ">
-                {{ form.name }}
-              </div>
-            </div>
 
-            <div class="row mb-1 d-flex justify-content-end align-items-center">
-              <div class="col-2">
-                <label for="g_qty{{ order.id }}">
-                  <strong>Price, ₴:</strong>
-                </label>
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Price, ₴:</strong>
+                  </label>
+                </div>
+                <div class="col">
+                  {{ form.price }}
+                </div>
               </div>
-              <div class="col">
-                {{ form.price }}
-              </div>
-            </div>
 
-            <div class="row mb-1 d-flex justify-content-end align-items-center">
-              <div class="col-2">
-                <label for="g_qty{{ order.id }}">
-                  <strong>Menu Section:</strong>
-                </label>
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Menu Section:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.menu_section }}
+                </div>
               </div>
-              <div class="col ">
-                {{ form.menu_section }}
-              </div>
-            </div>
 
-            <div class="row mb-1 d-flex justify-content-end align-items-center">
-              <div class="col-2">
-                <label for="g_qty{{ order.id }}">
-                  <strong>Active:</strong>
-                </label>
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Active:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.is_active }}
+                </div>
               </div>
-              <div class="col ">
-                {{ form.is_active }}
-              </div>
-            </div>
-            <hr>
-            <div class="row mb-1 d-flex justify-content-end align-items-center">
-              <div class="col-2">
-                <label for="g_qty{{ order.id }}">
-                  <strong>Menus:</strong>
-                </label>
-              </div>
-              <div class="col ">
-                {{ form.menus }}
+              <hr>
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Menus:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.menus }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-end mt-3">
-          <a href="#" onclick="history.back()" class="btn btn-outline-danger me-2 ">
-            Cancel
-          </a>
-          <button type="submit" class="btn btn-outline-dark btn-sm">
-            Save changes
-          </button>
-        </div>
-      </form>
+          <div class="d-flex justify-content-end mt-3">
+            <a href="#" onclick="history.back()" class="btn btn-outline-danger me-2 ">
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-outline-dark btn-sm">
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 {% endblock %}

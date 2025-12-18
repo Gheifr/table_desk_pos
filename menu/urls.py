@@ -5,6 +5,9 @@ from menu.views import MenuIndexView, MenuItemListView
 
 urlpatterns = [
     path("", MenuIndexView.as_view(), name="index"),
+    path("create/", views.menu_create, name="menu-create"),
+    path("update/<int:pk>", views.menu_update, name="menu-update"),
+    path("delete/<int:pk>", views.menu_delete, name="menu-delete"),
     path("menu-items/", MenuItemListView.as_view(), name="item-index"),
     path("menu-items/create/", views.menu_item_create, name="item-create"),
     path("menu-items/<int:pk>", views.menu_item_details, name="item-detail"),
