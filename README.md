@@ -6,7 +6,14 @@
 
 ## Installing / Getting started
 
-Try it locally:
+You may try the app with sample data [here](https://table-desk-pos.onrender.com/).  
+Credentials for testing:  
+```
+login: user
+password: user12345
+```
+
+Or start it locally:
 
 - Fork and clone the repository.
 - Create and activate a virtual environment.
