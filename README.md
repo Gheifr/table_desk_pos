@@ -6,7 +6,9 @@
 
 ## Installing / Getting started
 
-You may try the app with sample data [here](https://table-desk-pos.onrender.com/).  
+You may try the app with sample data [here](https://table-desk-pos.onrender.com/).
+>Be aware, that you might need to wait for the app to start  
+
 Credentials for testing:  
 ```
 login: user
@@ -23,7 +25,7 @@ Or start it locally:
 pip install -r requirements.txt
 ```
 
-- Create and connect a database.
+- Create and connect a [database](https://docs.djangoproject.com/en/6.0/ref/databases/).
 - Run migrations:
 
 ```shell
