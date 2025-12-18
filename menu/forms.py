@@ -10,8 +10,7 @@ class MenuForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple(attrs={"class": "form-check-inline-dark"}),
         label="Menu items",
     )
-    menu_sections = sorted(set(mi.menu_section.title() for mi in MenuItem.objects.filter(is_active=True)))
-
+    menu_sections = []
 
     class Meta:
         model = Menu
@@ -23,6 +22,7 @@ class MenuForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.menu_sections = sorted(set(mi.menu_section.title() for mi in MenuItem.objects.filter(is_active=True)))
         if self.instance.pk:
             self.fields["items"].initial = self.instance.items.all()
 
