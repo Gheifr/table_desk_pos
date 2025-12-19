@@ -1,0 +1,10 @@
+0. General
+- redefine all delete() to inactivate
+1. Menu items
+- Now just a paginated list -> create tabs by sections
+2. Menus
+- Improve UI
+3. Ordering
+- Improve UI
+4. point_of_sale
+- Implement CRUD for tables and properties
