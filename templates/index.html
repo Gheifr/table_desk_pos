@@ -1,10 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-The app is working
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  <title>TableDesk POS · Home</title>
+{% endblock %}
+
+{% block content %}
+  <div class="col-12 p-0">
+    <div id="tdHeroCarousel"
+         class="carousel slide carousel-fade td-hero-carousel"
+         data-bs-ride="carousel">
+
+      <div class="carousel-inner">
+
+        <div class="carousel-item active" data-bs-interval="4000">
+          <div class="td-hero-slide"
+               style="background-image: url('{% static "img/hero/hero-menu.png" %}');">
+            <div class="td-hero-overlay"></div>
+
+            <div class="td-hero-content text-center text-light">
+              <div class="td-hero-card p-4">
+                <h1 class="mb-3">Menus</h1>
+                <p class="lead mb-4">
+                  Browse current menus, grouped by sections for quick access.
+                </p>
+                <a href="{% url 'menus:index' %}" class="btn btn-outline-light btn-lg">
+                  View Menus
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="td-hero-slide"
+               style="background-image: url('{% static "img/hero/hero-order.png" %}');">
+            <div class="td-hero-overlay"></div>
+
+            <div class="td-hero-content text-center text-light">
+              <div class="td-hero-card p-4">
+                <h1 class="mb-3">Orders</h1>
+                <p class="lead mb-4">
+                  Create and manage active orders by table in a few clicks.
+                </p>
+                <a href="{% url 'orders:index' %}" class="btn btn-outline-light btn-lg">
+                  Go to Orders
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#tdHeroCarousel" data-bs-slide-to="0"
+                class="active" aria-current="true" aria-label="Menu slide"></button>
+        <button type="button" data-bs-target="#tdHeroCarousel" data-bs-slide-to="1"
+                aria-label="Orders slide"></button>
+      </div>
+
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#tdHeroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#tdHeroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+
+    </div>
+  </div>
+{% endblock %}

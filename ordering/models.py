@@ -1,5 +1,9 @@
+from decimal import Decimal
+
+from django.conf import settings
 from django.db import models
-from django.db.models import Max
+from django.db.models import Max, Sum, F
+from django.urls import reverse
 from django.utils import timezone
 
 from menu.models import MenuItem
@@ -25,12 +29,14 @@ class Order(models.Model):
     is_closed = models.BooleanField(default=False)
     guests_count = models.PositiveSmallIntegerField(default=1)
 
-    items = models.ManyToManyField(
-        MenuItem,
-        through="OrderItem",
+    employees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
         related_name="orders",
         blank=True,
     )
+
+    def get_absolute_url(self):
+        return reverse("orders:order-detail", args=[str(self.id)])
 
     def save(self, *args, **kwargs):
         if self.order_number is None:
@@ -46,13 +52,35 @@ class Order(models.Model):
             self.closed_at = timezone.now()
             self.save()
 
+    def delete(self):
+        self.close()
+        self.order_items.remove()
+        self.save()
+
+    def __str__(self):
+        return f"Order No: {self.order_number}, opened at: {self.opened_at}"
+
+    @property
+    def total_amount(self) -> Decimal:
+        result = (
+            self.order_items
+            .filter(is_active=True)
+            .aggregate(
+                total=Sum(
+                    F("quantity") * F("menu_item__price")
+                )
+            )["total"]
+        )
+        return result or Decimal("0.00")
+
 
 class OrderItem(models.Model):
     is_active = models.BooleanField(default=True)
 
     order = models.ForeignKey(
         Order,
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name="order_items",
     )
     menu_item = models.ForeignKey(
@@ -61,3 +89,14 @@ class OrderItem(models.Model):
         related_name="order_items",
     )
     quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"Order Item id: {self.id}, {self.menu_item.name}"
+
+    @property
+    def item_cost(self) -> Decimal:
+        return self.quantity * self.menu_item.price or Decimal("0.00")
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_active = False
+        super().save()

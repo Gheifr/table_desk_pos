@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}'); padding-bottom: 10px">
+    <div class="container-fluid">
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <h2>
+            {% if menu.pk %}{{ menu.name }}{% else %}New Menu{% endif %}
+          </h2>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          {% if menu.pk %}
+            <a href="{% url 'menus:menu-delete' menu.pk %}" class="btn btn-outline-dark bg-danger-subtle">
+              Delete
+            </a>
+          {% endif %}
+        </div>
+        <hr>
+      </div>
+    </div>
+
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="card pb-3">
+        <div class="card-body">
+          <div class="row mb-1 d-flex justify-content-end align-items-center">
+            <div class="col-2">
+              <strong>Name:</strong>
+            </div>
+            <div class="col ">
+              {{ form.name }}
+            </div>
+          </div>
+
+          <div class="row mb-1 d-flex justify-content-end align-items-center">
+            <div class="col-2">
+              <label for="g_qty{{ order.id }}">
+                <strong>Properties</strong>
+              </label>
+            </div>
+            <div class="col ">
+              {{ form.properties }}
+            </div>
+          </div>
+
+          <div class="row mb-1 d-flex justify-content-end align-items-center">
+            <div class="col-2">
+              <label for="g_qty{{ order.id }}">
+                <strong>Active:</strong>
+              </label>
+            </div>
+            <div class="col ">
+              {{ form.is_active }}
+            </div>
+          </div>
+          <hr>
+          <div class="row mb-1 d-flex justify-content-end align-items-center">
+            <div class="row">
+              <div class="col-2 mb-2">
+                <label>
+                  <strong>Menu Items:</strong>
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              {% if form.items %}
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    {% for sec in form.menu_sections %}
+                      <button class="nav-link {% if forloop.first %}active{% endif %}"
+                              id="nav-{{ sec|slugify }}-tab"
+                              data-bs-toggle="tab"
+                              data-bs-target="#nav-{{ sec|slugify }}"
+                              type="button"
+                              role="tab"
+                              aria-controls="nav-{{ sec|slugify }}"
+                              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                        {{ sec }}
+                      </button>
+                    {% endfor %}
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  {% for sec in form.menu_sections %}
+                    <div class="tab-pane fade {% if forloop.first %} show active{% endif %}"
+                         id="nav-{{ sec|slugify }}"
+                         role="tabpanel"
+                         aria-labelledby="nav-{{ sec|slugify }}-tab">
+                      {% for menu_item, checkbox in items_with_widgets %}
+                        {% if menu_item.menu_section.title == sec %}
+                          <div>
+                            {{ checkbox }} - {{ menu_item.price }} ₴
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <span>No items yet</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+        <a href="#" onclick="history.back()" class="btn btn-outline-danger me-2 ">
+          Cancel
+        </a>
+        <button type="submit" class="btn btn-outline-dark btn-sm">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block content %}
+  <section class="py-4 mx-0 d-flex align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="container">
+      <div class="row ">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <h1>Confirm Menu Delete</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex align-items-center justify-content-center">
+          <h3>Menu: <span class="text-danger">{{ menu.name }}</span>,
+            contains
+            {% if menu.items.count > 0 %}
+              {{ menu.items.count }} item{{ menu.items.count|pluralize }}.
+            {% else %}
+              no items.
+            {% endif %}
+          </h3>
+        </div>
+      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="row d-flex align-items-center justify-content-center mt-5">
+          <div class="col-6 d-flex justify-content-between">
+            <input type="submit" value="Delete" class="btn btn-outline-danger"
+                   style="min-width: 100px">
+            <button type="button"
+                    class="btn btn-outline-dark "
+                    style="min-width: 100px"
+                    onclick="history.back()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

@@ -8,10 +8,13 @@ class Menu(models.Model):
     is_active = models.BooleanField(default=True)
 
     properties = models.ManyToManyField(
-        Property,
+        "point_of_sale.Property",
         related_name="menus",
         blank=True,
     )
+
+    def __str__(self):
+        return self.name
 
 
 class MenuItem(models.Model):
@@ -25,3 +28,9 @@ class MenuItem(models.Model):
         related_name="items",
         blank=True,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]

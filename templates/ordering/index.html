@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 mx-0 align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    {% if orders.count == 0 %}
+      <div class="td-hero d-flex align-items-center justify-content-center">
+        <h3>No orders yet</h3>
+      </div>
+      <br>
+      <div class="td-hero d-flex align-items-center justify-content-center">
+        <img src="{% static 'img/gif/nothing_here.gif' %}" alt="No orders"/>
+      </div>
+      <div class="d-flex align-items-center justify-content-center m-5">
+        <button class="btn btn-outline-success btn-lg"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addOrderModal">
+          Create first one! 😊
+        </button>
+      </div>
+    {% else %}
+      <div class="container-fluid px-0 mx-1 w-100">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+          <h2>Current Open Orders</h2>
+
+          <button class="btn btn-outline-dark btn-sm"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addOrderModal">
+            New Order
+          </button>
+        </div>
+        <hr>
+        <table class="table table-hover">
+          <tr>
+            <th>Number</th>
+            <th>Table</th>
+            <th>Pax</th>
+            <th>Employee(s)</th>
+            <th>Opened on</th>
+          </tr>
+          {% for order in orders %}
+            <tr class="clickable-row" data-href="{% url 'orders:order-detail' order.id %}">
+              {% if not order.is_closed %}
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.table.table_number }}</td>
+                <td>{{ order.guests_count }}</td>
+                <td>
+                  {% if order.employees.count > 1 %}
+                    {% for empl in order.employees.all %}
+                      {{ empl.first_name }} {{ empl.last_name }}<br>
+                    {% endfor %}
+                  {% else %}
+                    {{ order.employees.first.first_name }} {{ order.employees.first.last_name }}
+                  {% endif %}
+                </td>
+                <td>{{ order.opened_at }}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% endif %}
+
+    <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <form id="addOrderForm" method="post" action="{% url 'orders:order-create' %}">
+          {% csrf_token %}
+          {{ form.is_cancelled }}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addOrderModalLabel">New Order</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% if form.errors %}
+              <div class="alert alert-danger m-2">
+                {{ form.errors }}
+              </div>
+            {% endif %}
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="tableSearch" class="form-label"><b>Table</b></label>
+
+                <input type="text"
+                       id="tableSearch"
+                       class="form-control form-control-sm mb-2"
+                       placeholder="Search by name..."
+                       oninput="filterTables()">
+
+                {{ form.table }}
+              </div>
+              <div class="mb-3">
+                <label class="form-label"><b>Guest</b></label>
+                {{ form.guests_count }}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button"
+                      class="btn btn-outline-danger btn-sm"
+                      data-bs-dismiss="modal"
+                      onclick="cancelCreateOrder()">
+                Cancel
+              </button>
+              <button type="submit"
+                      class="btn btn-outline-dark btn-sm">
+                Create
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block extra_scripts %}
+  {% if form.errors %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var modalEl = document.getElementById("addOrderModal");
+            if (modalEl) {
+                var modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+        });
+    </script>
+  {% endif %}
+  <script>
+      function cancelCreateOrder() {
+          const addOrderForm = document.getElementById("addOrderForm");
+          if (addOrderForm) {
+              addOrderForm.reset();
+          }
+
+          const cancelledInput = document.getElementById("id_is_cancelled");
+          if (cancelledInput) {
+              cancelledInput.value = "1";
+          }
+          document.getElementById("addOrderForm").submit();
+      }
+
+      function filterTables() {
+          const input = document.getElementById("tableSearch");
+          const filter = input.value.toLowerCase();
+          const select = document.getElementById("id_table");
+
+          if (!select) return;
+
+          for (const option of select.options) {
+              const text = option.text.toLowerCase();
+              option.hidden = filter && !text.includes(filter);
+          }
+
+          const firstVisible = Array.from(select.options).find(o => !o.hidden);
+          if (firstVisible) {
+              select.value = firstVisible.value;
+          }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+          const addOrderModal = document.getElementById("addOrderModal");
+          const addOrderForm = document.getElementById("addOrderForm");
+
+          if (addOrderModal && addOrderForm) {
+              addOrderModal.addEventListener("hidden.bs.modal", function () {
+                  addOrderForm.reset();
+              });
+          }
+      });
+  </script>
+{% endblock %}

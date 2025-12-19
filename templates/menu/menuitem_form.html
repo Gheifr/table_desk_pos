@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 mx-0 align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="col-12 col-lg-8 offset-lg-2 mt-3">
+      <div class="row">
+        <div class="col-8">
+          <h2>
+            {% if menu_item.pk %}{{ menu_item.name }}{% else %}New Item{% endif %}
+          </h2>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          {% if menu_item.pk %}
+            <a href="{% url 'menus:item-delete' menu_item.pk %}" class="btn btn-outline-dark bg-danger-subtle">
+              Delete
+            </a>
+          {% endif %}
+        </div>
+        <br>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="card pb-3">
+            <div class="card-body">
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <strong>Name:</strong>
+                </div>
+                <div class="col ">
+                  {{ form.name }}
+                </div>
+              </div>
+
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Price, ₴:</strong>
+                  </label>
+                </div>
+                <div class="col">
+                  {{ form.price }}
+                </div>
+              </div>
+
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Menu Section:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.menu_section }}
+                </div>
+              </div>
+
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Active:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.is_active }}
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-1 d-flex justify-content-end align-items-center">
+                <div class="col-2">
+                  <label for="g_qty{{ order.id }}">
+                    <strong>Menus:</strong>
+                  </label>
+                </div>
+                <div class="col ">
+                  {{ form.menus }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <a href="#" onclick="history.back()" class="btn btn-outline-danger me-2 ">
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-outline-dark btn-sm">
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

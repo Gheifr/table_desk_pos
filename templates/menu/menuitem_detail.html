@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 mx-0 align-items-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <h2>{{ menuitem.name }}</h2>
+    <hr>
+
+  </section>
+{% endblock %}

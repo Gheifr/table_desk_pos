@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block content %}
+  <section class="py-4 d-flex align-items-center w-100"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}')">
+    <div class="container">
+      <div class="row justify-content-center align-content-center">
+        <div class="col-9 d-flex justify-content-center align-content-center">
+          <h1>Confirm Menu Item Delete?</h1>
+        </div>
+      </div>
+
+        <div class="row d-flex justify-content-center">
+          <div class="col-6">
+            <table class="table table-bordered border-light-subtle bg-transparent">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Section</th>
+                <th>{% if menuitem.menus.count > 1 %}Menus{% else %}Menu{% endif %}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>{{ menuitem.name }}</td>
+                <td>{{ menuitem.price|floatformat:2 }} ₴</td>
+                <td>{{ menuitem.menu_section }}</td>
+                <td>
+                  {% if menuitem.menus %}
+                    {% if menuitem.menus.count > 1 %}
+                      {% for menu in menuitem.menus.all %}
+                        {{ menu.name }}<br>
+                      {% endfor %}
+                    {% else %}
+                      {{ menuitem.menus.first.name }}
+                    {% endif %}
+                  {% else %}
+                    Not assigned
+                  {% endif %}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-6">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="row justify-content-center align-content-center">
+              <div class="col d-flex justify-content-between ">
+                <input type="submit" value="Delete" class="btn btn-outline-danger"
+                       style="min-width: 100px">
+                <button type="button"
+                        class="btn btn-outline-dark "
+                        style="min-width: 100px"
+                        onclick="history.back()">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

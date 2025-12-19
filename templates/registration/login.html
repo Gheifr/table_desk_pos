@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters static %}
+
+{% block content %}
+  <section class="td-hero d-flex align-items-center justify-content-center"
+           style="background-image: url('{% static "img/pages-background-papyrus-cold.png" %}'); padding-bottom: 10px">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
+      {% if form.errors %}
+        <img
+            src=" {% static 'img/gif/sad.gif' %}"
+            alt="Oops... Wrong credentials entered!">
+        <h3>Oops...</h3>
+      {% else %}
+        {% if next %}
+          <img
+              src=" {% static 'img/gif/no.gif' %} "
+              width="120"
+              height="120"
+              alt="No, you have to login to access this page!">
+          <h3>You have to log in to access this page.</h3>
+        {% else %}
+          <img
+              src=" {% static 'img/gif/hi.gif' %} "
+              alt="Hi there, please log in!">
+          <h3>Hi there!</h3>
+          <h3>Please log in.</h3>
+        {% endif %}
+      {% endif %}
+
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input type="submit"
+               class="btn btn-light"
+               value="Submit"
+               style="background-color: lightgrey"
+        >
+        <input type="hidden"
+               name="next"
+               value="{{ next }}">
+      </form>
+    </div>
+  </section>
+{% endblock %}
